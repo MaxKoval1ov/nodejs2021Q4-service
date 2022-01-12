@@ -4,7 +4,7 @@ const {
     addTaskSchema,
     updateTaskSchema,
     deleteTaskSchema
-} = require('../schemas/task.schema');
+} = require('../schemas/task.schemas');
 
 const {
     getTasksHandler,

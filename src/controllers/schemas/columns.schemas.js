@@ -45,7 +45,7 @@ const updateColumnSchema = {
         require: []
     },
     params:{
-        id: {type: 'string'}
+        id: {type: 'number'},
     },
     response: {
         200: {type: 'string'},
@@ -66,5 +66,6 @@ module.exports = {
     getColumnSchema,
     addColumnSchema,
     updateColumnSchema,
-    deleteColumnSchema
+    deleteColumnSchema,
+    column
 }

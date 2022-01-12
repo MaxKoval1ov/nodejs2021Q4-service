@@ -34,7 +34,7 @@ const addTaskSchema = {
     type: 'object',
     required: [
       'title',
-      'oreder',
+      'order',
       'description',
       'userId',
       'boardId',
@@ -57,7 +57,7 @@ const updateTaskSchema = {
         require: []
     },
     params:{
-        id: {type: 'string'}
+        id: {type: 'number'}
     },
     response: {
         200: {type: 'string'},

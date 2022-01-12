@@ -25,8 +25,8 @@ const columns = [
 ];
 
 const boards = [
-  { id: 1, title: 'title board 1', order: 1 },
-  { id: 2, title: 'title board 2', order: 2 },
+  { id: 1, title: 'title board 1', columns },
+  { id: 2, title: 'title board 2', columns },
 ];
 
 const users = [

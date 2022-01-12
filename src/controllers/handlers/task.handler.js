@@ -46,24 +46,40 @@ const updateTaskHandler = (req, reply) => {
   return reply.send('Task updated');
 };
 
+const deleteTask = (id) => {
+  const taskIndex = tasks.findIndex((post) => post.id === id);
+  if (taskIndex === -1) {
+    return false;
+  }
+  tasks.splice(taskIndex, 1);
+  return true;
+}
+
+const deleteColumnTasks = (id) => {
+  const boardTasks = tasks.filter((task) => task.boardId === id);
+  if (boardTasks.length) boardTasks.forEach((task) => deleteTask(task.id));
+}
+
 const deleteTaskHandler = (req, reply) => {
   const { id } = req.params;
 
-  const taskIndex = tasks.findIndex((post) => post.id === id);
+  const res = deleteTask(id);
 
-  if (taskIndex === -1) {
+  if (!res) {
     return reply.status(404).send(new Error("Post doesn't exist"));
   }
 
-  tasks.splice(taskIndex, 1);
-
   return reply.send('Task deleted');
 };
+
+
 
 module.exports = {
   getTasksHandler,
   getTaskHandler,
   addTaskHandler,
   updateTaskHandler,
-  deleteTaskHandler
+  deleteTaskHandler, 
+  deleteColumnTasks,
+  deleteTask
 }

@@ -1,5 +1,5 @@
-const { columns } = require('./store');
-let {  tasks } = require('./store');
+const { columns, tasks } = require('./store');
+const { deleteColumnTasks, deleteTask } = require('./task.handler');
 
 const getColumnsHandler = (req, reply) => {
   reply.send(columns);
@@ -45,21 +45,32 @@ const updateColumnHandler = (req, reply) => {
   return reply.send('Column updated');
 };
 
+const deleteColumn = (id) => {
+  const columnIndex = columns.findIndex((post) => post.id === id);
+  if(!columnIndex === -1)
+    return false;
+  const tempColumn = columns.splice(columnIndex, 1)[0];
+  return   tempColumn;
+};
+
 const deleteColumnHandler = (req, reply) => {
   const { id } = req.params;
 
-  const columnIndex = columns.findIndex((post) => post.id === id);
+  const tmpColumn = deleteColumn(id);
 
-  if (columnIndex === -1) {
+  if (!tmpColumn) {
     return reply.status(404).send(new Error("Post doesn't exist"));
   }
 
-  columns.splice(columnIndex, 1);
-
-  tasks = tasks.filter((el) => el.columnId !== columnIndex);
-
+  deleteColumnTasks(tmpColumn.id);
+  
   return reply.send('Column deleted');
 };
+
+const deleteBoardTasks = (id) => {
+  const boardTasks =  tasks.filter((task) => task.boardId === id);
+  if (boardTasks.length) boardTasks.forEach((task) => deleteTask(task.id));
+}
 
 module.exports = {
   getColumnsHandler,
@@ -67,4 +78,5 @@ module.exports = {
   addColumnHandler,
   updateColumnHandler,
   deleteColumnHandler,
+  deleteBoardTasks
 };
