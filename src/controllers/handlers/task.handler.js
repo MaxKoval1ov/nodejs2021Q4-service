@@ -53,12 +53,22 @@ const deleteTask = (id) => {
   }
   tasks.splice(taskIndex, 1);
   return true;
-}
+};
 
 const deleteColumnTasks = (id) => {
   const boardTasks = tasks.filter((task) => task.boardId === id);
   if (boardTasks.length) boardTasks.forEach((task) => deleteTask(task.id));
-}
+};
+
+const deleteUserTasks = (id) => {
+  const userTasks = tasks.filter((task) => task.boardId === id);
+  if (userTasks.length)
+    userTasks.forEach((task) => {
+     if( task.userId === id) 
+      // eslint-disable-next-line no-param-reassign
+      task.userId = null;
+    });
+};
 
 const deleteTaskHandler = (req, reply) => {
   const { id } = req.params;
@@ -72,14 +82,13 @@ const deleteTaskHandler = (req, reply) => {
   return reply.send('Task deleted');
 };
 
-
-
 module.exports = {
   getTasksHandler,
   getTaskHandler,
   addTaskHandler,
   updateTaskHandler,
-  deleteTaskHandler, 
+  deleteTaskHandler,
   deleteColumnTasks,
-  deleteTask
-}
+  deleteTask,
+  deleteUserTasks
+};

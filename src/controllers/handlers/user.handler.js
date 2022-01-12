@@ -1,72 +1,72 @@
-const { deleteBoardTasks } = require('./column.handler');
-const { boards } = require('./store');
+const { users } = require('./store');
+const { deleteUserTasks } = require('./task.handler');
 
-const getBoardsHandler = (req, reply) => {
-  reply.send(boards);
+const getUsersHandler = (req, reply) => {
+  reply.send(users);
 };
 
-const getBoardHandler = (req, reply) => {
+const getUserHandler = (req, reply) => {
   const { id } = req.params;
 
-  const board = boards.filter((elem) => elem.id === id)[0];
+  const user = users.filter((elem) => elem.id === id)[0];
 
-  if (!boards) {
-    return reply.status(404).send(new Error('Column not found'));
+  if (!user) {
+    return reply.status(404).send(new Error('User not found'));
   }
 
-  return reply.send(board);
+  return reply.send(user);
 };
 
-const addBoardHandler = (req, reply) => {
-  const { title, columns } = req.body;
+const addUserHandler = (req, reply) => {
+  const { name, login, password } = req.body;
 
-  const id = boards.length + 1;
+  const id = users.length + 1;
 
-  boards.push({ id, title, columns });
+  users.push({ id, name, login, password });
 
-  reply.send('Post added');
+  reply.send('User has been added');
 };
 
-const updateBoardHandler = (req, reply) => {
-  const { title, columns } = req.body;
+const updateUserHandler = (req, reply) => {
+  const { name, login, password } = req.body;
   const { id } = req.params;
 
-  const board = boards.filter((element) => element.id === id)[0];
+  const user = users.filter((element) => element.id === id)[0];
 
-  if (!board) {
+  if (!user) {
     return reply.status(404).send(new Error("Column doesn't exist"));
   }
 
-  // eslint-disable-next-line no-bitwise
-  board.title |= title;
-  // eslint-disable-next-line no-bitwise
-  board.columns |= columns;
+  user.name ||= name;
+  user.login ||= login;
+  user.password ||= password;
 
-  return reply.send('Column updated');
+
+  return reply.send('User updated');
 };
 
 
-const deleteBoardHandler = (req, reply) => {
+const deleteUserHandler = (req, reply) => {
   const { id } = req.params;
 
-  const boardIndex = boards.findIndex((post) => post.id === id);
+  const userIndex = users.findIndex((post) => post.id === id);
 
 
-  if (boardIndex === -1) {
+  if (userIndex === -1) {
     return reply.status(404).send(new Error("Post doesn't exist"));
   }
 
-  deleteBoardTasks(boards[boardIndex].id);
+  deleteUserTasks(users[userIndex].id);
 
-  boards.splice(boardIndex, 1);
+  users.splice(userIndex, 1);
 
-  return reply.send('Column deleted');
+  return reply.send('User deleted');
 };
 
 module.exports = {
-    getBoardsHandler,
-    getBoardHandler,
-    addBoardHandler,
-    updateBoardHandler,
-    deleteBoardHandler
+    getUsersHandler,
+    getUserHandler,
+    addUserHandler,
+    updateUserHandler,
+    deleteUserHandler
 };
