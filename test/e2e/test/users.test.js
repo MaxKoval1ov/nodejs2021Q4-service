@@ -50,7 +50,7 @@ describe('Users suite', () => {
         .post(routes.users.create)
         .set('Accept', 'application/json')
         .send(TEST_USER_DATA)
-        .expect(201)
+        .expect(200)
         .expect('Content-Type', /json/)
         .then(res => {
           expect(res.body.id).to.be.a('string');

@@ -13,8 +13,7 @@ const getUserHandler = (req, reply) => {
   if (!user) {
     return reply.status(404).send(new Error('User not found'));
   }
-
-  return reply.send(user);
+    return reply.header('Content-Type', 'application/json; charset=utf-8').send(user);
 };
 
 const addUserHandler = (req, reply) => {
@@ -24,7 +23,7 @@ const addUserHandler = (req, reply) => {
 
   users.push({ id, name, login, password });
 
-  reply.send('User has been added');
+  reply.send({message:'User has been added'});
 };
 
 const updateUserHandler = (req, reply) => {

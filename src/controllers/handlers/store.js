@@ -31,7 +31,7 @@ const boards = [
 
 const users = [
   { id: 1, name: 'first', login: 'login1', password: 'p@55word' },
-  { id: 1, name: 'first', login: 'login1', password: 'p@55word' },
+  { id: 2, name: 'first', login: 'login1', password: 'p@55word' },
 ];
 
 module.exports = {
