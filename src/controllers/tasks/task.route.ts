@@ -39,7 +39,7 @@ const getTasksOpts = {
     handler: deleteTaskHandler,
   };
   
-  const tasksRoutes = (fastify, opts, done) => {
+  export const tasksRoutes = (fastify, opts, done) => {
     fastify.get('/tasks', getTasksOpts);
   
     fastify.get('/tasks/:id', getTaskOpts);
@@ -53,4 +53,3 @@ const getTasksOpts = {
     done();
   };
   
-  module.exports = tasksRoutes;

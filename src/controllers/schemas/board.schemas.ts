@@ -60,7 +60,7 @@ const deleteBoardSchema = {
   },
 };
 
-module.exports = {
+export {
   getBoardsSchema,
   getBoardSchema,
   addBoardSchema,

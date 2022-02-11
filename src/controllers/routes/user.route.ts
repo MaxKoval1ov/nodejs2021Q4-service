@@ -39,7 +39,7 @@ const getUsersOpts = {
     handler: deleteUserHandler,
   };
   
-  const userRoutes = (fastify, opts, done) => {
+  export const userRoutes = (fastify, opts, done) => {
     fastify.get('/users', getUsersOpts);
   
     fastify.get('/users/:id', getUserOpts);
@@ -53,4 +53,3 @@ const getUsersOpts = {
     done();
   };
   
-  module.exports = userRoutes;

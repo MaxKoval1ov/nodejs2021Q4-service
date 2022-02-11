@@ -47,7 +47,7 @@ const updateColumnHandler = (req, reply) => {
 
 const deleteColumn = (id) => {
   const columnIndex = columns.findIndex((post) => post.id === id);
-  if(!columnIndex === -1)
+  if(columnIndex === -1)
     return false;
   const tempColumn = columns.splice(columnIndex, 1)[0];
   return   tempColumn;
@@ -72,11 +72,11 @@ const deleteBoardTasks = (id) => {
   if (boardTasks.length) boardTasks.forEach((task) => deleteTask(task.id));
 }
 
-module.exports = {
+export {
   getColumnsHandler,
   getColumnHandler,
   addColumnHandler,
   updateColumnHandler,
   deleteColumnHandler,
   deleteBoardTasks
-};
+}

@@ -62,7 +62,7 @@ const deleteUserHandler = (req, reply) => {
   return reply.send('User deleted');
 };
 
-module.exports = {
+export {
     getUsersHandler,
     getUserHandler,
     addUserHandler,

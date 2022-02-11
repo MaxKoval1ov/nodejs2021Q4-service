@@ -39,7 +39,7 @@ const getColumnsOpts = {
     handler: deleteColumnHandler,
   };
   
-  const columnsRoutes = (fastify, opts, done) => {
+  export const columnsRoutes = (fastify, opts, done) => {
     fastify.get('/columns', getColumnsOpts);
   
     fastify.get('/columns/:id', getColumnOpts);
@@ -53,4 +53,3 @@ const getColumnsOpts = {
     done();
   };
   
-  module.exports = columnsRoutes;

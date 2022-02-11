@@ -5,6 +5,7 @@ const getBoardsHandler = (req, reply) => {
   reply.send(boards);
 };
 
+
 const getBoardHandler = (req, reply) => {
   const { id } = req.params;
 
@@ -63,7 +64,7 @@ const deleteBoardHandler = (req, reply) => {
   return reply.send('Column deleted');
 };
 
-module.exports = {
+export  {
     getBoardsHandler,
     getBoardHandler,
     addBoardHandler,

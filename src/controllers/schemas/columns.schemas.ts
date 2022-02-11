@@ -61,7 +61,7 @@ const deleteColumnSchema = {
     }
 }
 
-module.exports = {
+export  {
     getColumnsSchema,
     getColumnSchema,
     addColumnSchema,

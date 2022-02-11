@@ -39,7 +39,7 @@ const getBoardsOpts = {
     handler: deleteBoardHandler,
   };
   
-  const columnsRoutes = (fastify, opts, done) => {
+  export const columnsRoutes = (fastify, opts, done) => {
     fastify.get('/boards', getBoardsOpts);
   
     fastify.get('/boards/:id', getBoardOpts);
@@ -53,4 +53,3 @@ const getBoardsOpts = {
     done();
   };
   
-  module.exports = columnsRoutes;

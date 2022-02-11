@@ -60,7 +60,7 @@ const deleteUserSchema = {
   },
 };
 
-module.exports = {
+export {
   getUsersSchema,
   getUserSchema,
   addUserSchema,

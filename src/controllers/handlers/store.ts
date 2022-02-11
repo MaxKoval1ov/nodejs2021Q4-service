@@ -34,7 +34,7 @@ const users = [
   { id: 2, name: 'first', login: 'login1', password: 'p@55word' },
 ];
 
-module.exports = {
+export {
   tasks,
   columns,
   boards,

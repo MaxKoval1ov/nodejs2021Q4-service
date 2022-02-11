@@ -73,7 +73,7 @@ const deleteTaskSchema = {
     }
 }
 
-module.exports = {
+export {
     getTasksSchema,
     getTaskSchema,
     addTaskSchema,
