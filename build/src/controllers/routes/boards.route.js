@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.columnsRoutes = void 0;
 var _a = require('../schemas/board.schemas'), getBoardsSchema = _a.getBoardsSchema, getBoardSchema = _a.getBoardSchema, addBoardSchema = _a.addBoardSchema, updateBoardSchema = _a.updateBoardSchema, deleteBoardSchema = _a.deleteBoardSchema;
 var _b = require('../handlers/board.handler'), getBoardsHandler = _b.getBoardsHandler, getBoardHandler = _b.getBoardHandler, addBoardHandler = _b.addBoardHandler, updateBoardHandler = _b.updateBoardHandler, deleteBoardHandler = _b.deleteBoardHandler;
 var getBoardsOpts = {
@@ -29,4 +31,4 @@ var columnsRoutes = function (fastify, opts, done) {
     fastify.delete('/boards/:id', deleteBoardOpts);
     done();
 };
-module.exports = columnsRoutes;
+exports.columnsRoutes = columnsRoutes;

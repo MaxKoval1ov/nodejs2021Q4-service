@@ -1,55 +1,59 @@
-const {
-    getTasksSchema,
-    getTaskSchema,
-    addTaskSchema,
-    updateTaskSchema,
-    deleteTaskSchema
-} = require('../schemas/task.schemas');
+import {  FastifyPluginAsync } from 'fastify';
 
-const {
-    getTasksHandler,
-    getTaskHandler,
-    addTaskHandler,
-    updateTaskHandler,
-    deleteTaskHandler
-  } = require('../handlers/task.handler')
+import {
+  getAllTasksSchema,
+  getTaskSchema,
+  addTaskSchema,
+  updateTaskSchema,
+  deleteTaskSchema,
+} from './task.schemas'
+
+import{
+  getAllTasksRoute,
+  getTaskRouter,
+  addTaskRouter,
+  updateTaskRouter,
+  deleteTaskRouter
+} from './task.handler'
+
 
 const getTasksOpts = {
-    schema: getTasksSchema,
-    handler: getTasksHandler,
+    schema: getAllTasksSchema,
+    handler: getAllTasksRoute,
   };
   
   const getTaskOpts = {
     schema: getTaskSchema,
-    handler: getTaskHandler,
+    handler: getTaskRouter,
   };
   
   const addTaskOpts = {
     schema: addTaskSchema,
-    handler: addTaskHandler,
+    handler: addTaskRouter,
   };
   
   const updateTaskOpts = {
     schema: updateTaskSchema,
-    handler: updateTaskHandler,
+    handler: updateTaskRouter,
   };
   
   const deleteTaskOpts = {
     schema: deleteTaskSchema,
-    handler: deleteTaskHandler,
+    handler: deleteTaskRouter,
   };
   
-  export const tasksRoutes = (fastify, opts, done) => {
-    fastify.get('/tasks', getTasksOpts);
+   const tasksRoutes:FastifyPluginAsync = async (app) => {
+    app.get('/tasks', getTasksOpts);
   
-    fastify.get('/tasks/:id', getTaskOpts);
+    app.get('/tasks/:id', getTaskOpts);
   
-    fastify.post('/tasks', addTaskOpts);
+    app.post('/tasks', addTaskOpts);
   
-    fastify.put('/tasks/:id', updateTaskOpts);
+    app.put('/tasks/:id', updateTaskOpts);
   
-    fastify.delete('/tasks/:id', deleteTaskOpts);
+    app.delete('/tasks/:id', deleteTaskOpts);
   
-    done();
   };
+
+  export default tasksRoutes;
   

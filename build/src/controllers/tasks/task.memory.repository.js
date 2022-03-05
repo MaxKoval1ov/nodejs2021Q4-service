@@ -35,23 +35,52 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var config_1 = require("./common/config");
-var app_1 = __importDefault(require("./app"));
-var startServer = function () { return __awaiter(void 0, void 0, void 0, function () {
+exports.updateUserId = exports.deleteBoardTaks = exports.deleteTask = exports.updateTask = exports.addTask = exports.getTask = exports.getAllTasks = void 0;
+var dbTasks = [];
+var getAllTasks = function () { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
+    return [2 /*return*/, dbTasks];
+}); }); };
+exports.getAllTasks = getAllTasks;
+var getTask = function (id) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
+    return [2 /*return*/, dbTasks.find(function (task) { return task.id === id; })];
+}); }); };
+exports.getTask = getTask;
+var addTask = function (task) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
-        try {
-            app_1.default.listen(config_1.PORT, function () {
-                return console.log("Server is running on port : ".concat(config_1.PORT, "}"));
-            });
-        }
-        catch (_b) {
-            process.exit(1);
-        }
+        dbTasks.push(task);
         return [2 /*return*/];
     });
 }); };
-startServer();
+exports.addTask = addTask;
+var updateTask = function (id, newTask) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        dbTasks = dbTasks.map(function (task) { return (task.id === id ? newTask : task); });
+        return [2 /*return*/];
+    });
+}); };
+exports.updateTask = updateTask;
+var deleteTask = function (id) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        dbTasks.filter(function (task) { return task.id !== id; });
+        return [2 /*return*/];
+    });
+}); };
+exports.deleteTask = deleteTask;
+var deleteBoardTaks = function (id) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        dbTasks = dbTasks.filter(function (task) { return task.boardId !== id; });
+        return [2 /*return*/];
+    });
+}); };
+exports.deleteBoardTaks = deleteBoardTaks;
+var updateUserId = function (userId) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        dbTasks.forEach(function (task) {
+            if (task.userId === userId)
+                task.userId = null;
+        });
+        return [2 /*return*/];
+    });
+}); };
+exports.updateUserId = updateUserId;

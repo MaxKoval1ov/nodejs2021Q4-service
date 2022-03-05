@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.userRoutes = void 0;
 var _a = require('../schemas/user.schemas'), getUsersSchema = _a.getUsersSchema, getUserSchema = _a.getUserSchema, addUserSchema = _a.addUserSchema, updateUserSchema = _a.updateUserSchema, deleteUserSchema = _a.deleteUserSchema;
 var _b = require('../handlers/user.handler'), getUsersHandler = _b.getUsersHandler, getUserHandler = _b.getUserHandler, addUserHandler = _b.addUserHandler, updateUserHandler = _b.updateUserHandler, deleteUserHandler = _b.deleteUserHandler;
 var getUsersOpts = {
@@ -29,4 +31,4 @@ var userRoutes = function (fastify, opts, done) {
     fastify.delete('/users/:id', deleteUserOpts);
     done();
 };
-module.exports = userRoutes;
+exports.userRoutes = userRoutes;

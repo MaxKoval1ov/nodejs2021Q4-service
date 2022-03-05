@@ -1,17 +1,18 @@
 const task = {
   type: 'object',
+  required: ['title', 'order', 'description', 'userId', 'boardId'],
   properties: {
-    id: { type: 'number' },
+    id: { type: 'string' },
     title: { type: 'string' },
     order: { type: 'number' },
     decription: { type: 'string' },
-    userId: { type: 'number' },
-    boardId: { type: 'number' },
-    columnId: { type: 'number' },
+    userId: { type: ['number', 'null'] },
+    boardId: { type: ['number', 'null'] },
+    columnId: { type: ['number', 'null'] },
   },
 };
 
-const getTasksSchema = {
+const getAllTasksSchema = {
   response: {
     200: {
       type: 'array',
@@ -19,6 +20,7 @@ const getTasksSchema = {
     },
   },
 };
+
 
 const getTaskSchema = {
   params: {
@@ -49,34 +51,39 @@ const addTaskSchema = {
       columnId: { type: 'number' },
     },
   },
+  response: {
+    201: task,
+  },
 };
 
 const updateTaskSchema = {
-    body: {
-        type: 'object',
-        require: []
-    },
-    params:{
-        id: {type: 'number'}
-    },
-    response: {
-        200: {type: 'string'},
-    }
-}
+  body: task,
+  params: {
+    id: { type: 'number' },
+  },
+  response: {
+    200: task,
+  },
+};
 
 const deleteTaskSchema = {
-    params: {
-        id: { type:'number' }
+  params: {
+    id: { type: 'number' },
+  },
+  response: {
+    204: {
+      type: 'object',
+      properties: {
+        message: { type: 'string' },
+      },
     },
-    response: {
-        200: { type: 'string' }
-    }
-}
+  },
+};
 
 export {
-    getTasksSchema,
-    getTaskSchema,
-    addTaskSchema,
-    updateTaskSchema,
-    deleteTaskSchema
-}
+  getAllTasksSchema,
+  getTaskSchema,
+  addTaskSchema,
+  updateTaskSchema,
+  deleteTaskSchema,
+};

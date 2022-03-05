@@ -35,23 +35,37 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var config_1 = require("./common/config");
-var app_1 = __importDefault(require("./app"));
-var startServer = function () { return __awaiter(void 0, void 0, void 0, function () {
+var task_schemas_1 = require("./task.schemas");
+var task_handler_1 = require("./task.handler");
+var getTasksOpts = {
+    schema: task_schemas_1.getAllTasksSchema,
+    handler: task_handler_1.getAllTasksRoute,
+};
+var getTaskOpts = {
+    schema: task_schemas_1.getTaskSchema,
+    handler: task_handler_1.getTaskRouter,
+};
+var addTaskOpts = {
+    schema: task_schemas_1.addTaskSchema,
+    handler: task_handler_1.addTaskRouter,
+};
+var updateTaskOpts = {
+    schema: task_schemas_1.updateTaskSchema,
+    handler: task_handler_1.updateTaskRouter,
+};
+var deleteTaskOpts = {
+    schema: task_schemas_1.deleteTaskSchema,
+    handler: task_handler_1.deleteTaskRouter,
+};
+var tasksRoutes = function (app) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
-        try {
-            app_1.default.listen(config_1.PORT, function () {
-                return console.log("Server is running on port : ".concat(config_1.PORT, "}"));
-            });
-        }
-        catch (_b) {
-            process.exit(1);
-        }
+        app.get('/tasks', getTasksOpts);
+        app.get('/tasks/:id', getTaskOpts);
+        app.post('/tasks', addTaskOpts);
+        app.put('/tasks/:id', updateTaskOpts);
+        app.delete('/tasks/:id', deleteTaskOpts);
         return [2 /*return*/];
     });
 }); };
-startServer();
+exports.default = tasksRoutes;
